@@ -4,10 +4,10 @@ const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
   filled: true,
   enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.white, width: 2)
+      borderSide: BorderSide(color: Color(0xFFF5F5F5), width: 2)
   ),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: colorMainAccent, width: 2) // Color.pink[200]
+      borderSide: BorderSide(width: 2) // Color.pink[200]
   ),
 );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_diabetics/screens/home/data_add.dart';
+import 'package:flutter_diabetics/screens/home/add_food_record.dart';
+import 'package:flutter_diabetics/screens/home/add_glucose_record.dart';
 import 'package:flutter_diabetics/screens/home/settings_form.dart';
 import 'package:flutter_diabetics/services/auth.dart';
 import 'package:flutter_diabetics/services/database.dart';
@@ -83,6 +84,10 @@ class HomeBtns extends StatelessWidget {
                                   appBar: AppBar(
                                     title: Text("Ввід заміру цукру"),
                                   ),
+                                  body: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                                    child: AddGlucoseRecordForm(),
+                                  )
                                 )
                             )
                         );

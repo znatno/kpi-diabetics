@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_diabetics/models/brew.dart';
 import 'package:flutter_diabetics/models/app_user.dart';
+import 'package:flutter_diabetics/models/glucose_record.dart';
 
 class DatabaseService {
 
@@ -14,9 +15,6 @@ class DatabaseService {
   // register & update settings
   Future<void> updateUserData(String name) async {
 
-    //await userCollection.doc(uid).collection('foodRecords').doc('test').set({'key': "value"});
-    //await userCollection.doc(uid).collection('glucoseRecords').doc('test').set({'key': "value"});
-
     return await userCollection.doc(uid).set({
       'name': name,
       'startShown': false,
@@ -29,9 +27,12 @@ class DatabaseService {
   // TODO: додати запис прийому їжі
 
 
-
   // TODO: додати запис заміру цукру
+  Future updateGlucoseRecord(GlucoseRecord glucoseRecord) async {
 
+    return await userCollection.doc(uid).collection('glucoseRecords')
+        .doc(glucoseRecord.id).set(glucoseRecord.toMap());
+  }
 
 
   // brew list from snapshot
