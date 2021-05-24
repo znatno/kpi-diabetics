@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_diabetics/services/database.dart';
-import 'file:///Users/Ivan/Code/_learning-flutter/flutter-diabetics/flutter_diabetics/lib/shared/constants.dart';
+import 'package:flutter_diabetics/shared/constants.dart';
 import 'package:flutter_diabetics/models/app_user.dart';
 import 'package:flutter_diabetics/shared/loading.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class _SettingsFormState extends State<SettingsForm> {
               child: Column(
                 children: [
                 Text(
-                'Update your brew settings',
+                'Update your settings',
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(height: 20),

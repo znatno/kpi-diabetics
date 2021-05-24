@@ -23,3 +23,16 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/*
+
+void main() => runApp(MaterialApp(
+  initialRoute: '/',
+  routes: {
+    '/': (context) => Loading(),
+    '/home': (context) => Home(),
+    '/location': (context) => ChooseLocation(),
+  },
+));
+
+*/

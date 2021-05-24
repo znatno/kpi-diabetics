@@ -10,9 +10,12 @@ class UserData {
 
   final String uid;
   final String name;
-  final String sugars;
-  final int strength;
+  final bool   startShown;
+  final String defaultGlucoseUnit;
+  final String defaultMealUnit;
+  final String glucoseCoefficient;
 
-  UserData({ this.uid, this.sugars, this.strength, this.name });
+  UserData({ this.uid, this.name, this.startShown, this.defaultGlucoseUnit,
+              this.defaultMealUnit, this.glucoseCoefficient });
 
 }

@@ -34,6 +34,8 @@ dependencies:
   provider: ^4.3.3
   flutter_spinkit: ^4.1.2
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,8 +54,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets
+#  assets:
+#    - assets
 #    - assets/coffee_bg.png
 #    - assets/coffee_icon.png
 
