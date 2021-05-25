@@ -14,8 +14,8 @@ class FoodIntake {
 class FoodRecord {
 
   final String id;
-  final DateTime timestamp;          // дата і час створення запису
-  final String type;            // сніданок, обід, вечеря тощо
+  final DateTime timestamp;         // дата і час створення запису
+  final String type;                // сніданок, обід, вечеря тощо
   final List<FoodIntake> foodList;  // список спожитих продуктів
   final double totalCarbs;          // сума усіх totalCarbs зі списку
   final double recommendedDose;     // рекомендована додатком доза
