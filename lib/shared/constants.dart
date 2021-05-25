@@ -7,7 +7,7 @@ const textInputDecoration = InputDecoration(
       borderSide: BorderSide(color: Color(0xFFF5F5F5), width: 2)
   ),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 2) // Color.pink[200]
+      borderSide: BorderSide(color: Color(0xFF2196F3), width: 2) // Color.pink[200]
   ),
 );
 

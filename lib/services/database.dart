@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_diabetics/models/brew.dart';
 import 'package:flutter_diabetics/models/app_user.dart';
+import 'package:flutter_diabetics/models/food_record.dart';
 import 'package:flutter_diabetics/models/glucose_record.dart';
 
 class DatabaseService {
@@ -25,9 +26,14 @@ class DatabaseService {
   }
 
   // TODO: додати запис прийому їжі
+  Future updateFoodRecord(FoodRecord foodRecord) async {
+
+    return await userCollection.doc(uid).collection('foodRecords')
+        .doc(foodRecord.id).set(foodRecord.toMap());
+  }
 
 
-  // TODO: додати запис заміру цукру
+  // додати або оновити запис заміру цукру
   Future updateGlucoseRecord(GlucoseRecord glucoseRecord) async {
 
     return await userCollection.doc(uid).collection('glucoseRecords')

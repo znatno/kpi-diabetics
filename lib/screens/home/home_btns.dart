@@ -25,6 +25,7 @@ class HomeBtns extends StatelessWidget {
     }
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text('Diabetics App'),
@@ -81,10 +82,11 @@ class HomeBtns extends StatelessWidget {
                             context,
                             MaterialPageRoute(builder: (context) =>
                                 Scaffold(
-                                  appBar: AppBar(
+                                    resizeToAvoidBottomInset: false,
+                                    appBar: AppBar(
                                     title: Text("Ввід заміру цукру"),
                                   ),
-                                  body: Container(
+                                    body: Container(
                                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                                     child: AddGlucoseRecordForm(),
                                   )

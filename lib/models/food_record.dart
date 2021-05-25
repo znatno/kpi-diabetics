@@ -1,6 +1,6 @@
 class FoodIntake {
 
-  final String name;
+  final String name;        // назва їжі
   final String units;       // грами, мл тощо
   final double amount;      // к-сть грам/мл
   final double carbs;       // к-сть вуглеводів на 100 од.
@@ -13,13 +13,24 @@ class FoodIntake {
 
 class FoodRecord {
 
-  final DateTime dateTime;          // дата і час створення запису
-  final String mealType;            // сніданок, обід, вечеря тощо
+  final String id;
+  final DateTime timestamp;          // дата і час створення запису
+  final String type;            // сніданок, обід, вечеря тощо
   final List<FoodIntake> foodList;  // список спожитих продуктів
   final double totalCarbs;          // сума усіх totalCarbs зі списку
   final double recommendedDose;     // рекомендована додатком доза
 
-  FoodRecord({ this.dateTime, this.mealType, this.foodList,
+  FoodRecord({ this.id, this.timestamp, this.type, this.foodList,
                 this.totalCarbs, this.recommendedDose });
+
+  Map<String, dynamic> toMap() {
+    return {
+      "timestamp": timestamp,
+      "type": type,
+      "foodList": foodList,
+      "totalCarbs": totalCarbs,
+      "recommendedDose": recommendedDose,
+    };
+  }
 
 }
