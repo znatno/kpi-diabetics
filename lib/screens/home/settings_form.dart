@@ -13,12 +13,8 @@ class SettingsForm extends StatefulWidget {
 class _SettingsFormState extends State<SettingsForm> {
 
   final _formKey = GlobalKey<FormState>();
-  final List<String> sugars = ['0', '1', '2', '3', '4', '5'];
 
-  // form values
   String _currentName;
-  // String _currentSugars;
-  // int _currentStrength;
 
   @override
   Widget build(BuildContext context) {

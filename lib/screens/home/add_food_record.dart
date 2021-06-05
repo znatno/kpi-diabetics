@@ -18,17 +18,12 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
   final List<String> _recordType = ["Cніданок", "Обід", "Вечеря", "Перед сном", "Інше"];
   final List<String> _intakeUnits = ["Грами", "Мілілітри", "Інше"];
 
-  String    _type = "Сніданок";       // сніданок, обід, вечеря тощо
-  double    _totalCarbs;              // кількість одиниць
-  double    _recommendedDose;         // рекомендована доза
+  String    _type = "Сніданок"; // сніданок, обід, вечеря тощо
 
-  String    _name;        // назва їжі
-  String    _units = "Грами";       // грами, мл тощо
-  double    _amount;      // к-сть грам/мл
-  double    _carbs;       // к-сть вуглеводів на 100 од.
-  double    _intakeCarbs; // amount * carbs
-
-  var test;
+  String    _name;              // назва їжі
+  String    _units = "Грами";   // грами, мл тощо
+  double    _amount;            // к-сть грам/мл
+  double    _carbs;             // к-сть вуглеводів на 100 од.
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +79,7 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
               keyboardType: TextInputType.number,
               decoration: textInputDecoration.copyWith(labelText: "Кількість ($_units)"),
               validator: (val) => val.isEmpty || num.tryParse(val) < 0 ? 'Будь ласка, введіть кількість ($_units)' : null,
-              onChanged: (val) => setState(() => _amount = num.tryParse(val)),
+              onChanged: (val) => setState(() => _amount = num.tryParse(val).toDouble() ?? 0.0),
             ),
             SizedBox(height: 20),
             // carbs per 100 units
@@ -92,40 +87,38 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
               keyboardType: TextInputType.number,
               decoration: textInputDecoration.copyWith(labelText: "Кількість вуглеводів на 100 одиниць ($_units)"),
               validator: (val) => val.isEmpty || num.tryParse(val) < 0 ? 'Будь ласка, введіть кількість вуглеводів на 100 одиниць ($_units)' : null,
-              onChanged: (val) => setState(() => _carbs = num.tryParse(val)),
+              onChanged: (val) => setState(() => _carbs = num.tryParse(val)?.toDouble() ?? 0.0),
             ),
             SizedBox(height: 10),
             // Add foodIntake
-            RaisedButton(
-              onPressed: () async {
-
-                // TODO: додати функцію додавання додаткового foodIntake
-              },
-              color: Colors.blue[300],
-              child: Text(
-                  'Додати ще спожиту їжу',
-                  style: TextStyle(color: Colors.white)),
-            ),
-            SizedBox(height: 10),
+            // RaisedButton(
+            //   onPressed: () async {
+            //
+            //     // TODO: додати функцію додавання додаткового foodIntake
+            //   },
+            //   color: Colors.blue[300],
+            //   child: Text(
+            //       'Додати ще спожиту їжу',
+            //       style: TextStyle(color: Colors.white)),
+            // ),
+            // SizedBox(height: 10),
             Divider(),
             // SUBMIT
-            RaisedButton(
+            ElevatedButton(
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
 
-                  FoodRecord _record = new FoodRecord(
+                  FoodRecord _record = FoodRecord(
                     timestamp: DateTime.now(),
                     type: _type,
-                    foodList: test,
-                    totalCarbs: _totalCarbs,
-                    recommendedDose: _recommendedDose,
+                    foodList: [{_name, _units, _amount, _carbs}],
+                    totalCarbs: _carbs * _amount / 100,
                   );
 
-                  await DatabaseService(uid: user.uid).updateFoodRecord(_record);
+                  // await DatabaseService(uid: user.uid).updateFoodRecord(_record);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ShowRecommend(record: _record)),);
                 }
               },
-              color: colorMainAccent,
               child: Text(
                   'Додати прийом їжі',
                   style: TextStyle(color: Colors.white)),

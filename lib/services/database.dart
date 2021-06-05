@@ -19,10 +19,20 @@ class DatabaseService {
     return await userCollection.doc(uid).set({
       'name': name,
       'startShown': false,
-      'defaultGlucoseUnit': "", // todo: add implementation
-      'defaultMealUnit': "",    // todo: add implementation
-      'glucoseCoefficient': 1,  // individual coefficient chosen by doctor
+      'defaultGlucoseUnit': "ммоль/л", // todo: add implementation
+      'defaultMealUnit': "грами",    // todo: add implementation
+      'glucoseCoefficient': 1,  // todo: individual coefficient chosen by doctor
     });
+  }
+
+  Future<String> getUserGC() async {
+    String coef;
+
+    await userCollection.doc(uid).get().then((snapshot) {
+      coef = snapshot.data()['glucoseCoefficient'].toString();
+    });
+
+    return coef;
   }
 
   // TODO: додати запис прийому їжі
@@ -32,14 +42,12 @@ class DatabaseService {
         .doc(foodRecord.id).set(foodRecord.toMap());
   }
 
-
   // додати або оновити запис заміру цукру
   Future updateGlucoseRecord(GlucoseRecord glucoseRecord) async {
 
     return await userCollection.doc(uid).collection('glucoseRecords')
         .doc(glucoseRecord.id).set(glucoseRecord.toMap());
   }
-
 
   // brew list from snapshot
   List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
@@ -55,7 +63,9 @@ class DatabaseService {
     return UserData(
       uid: uid,
       name: snapshot.data()['name'],
-
+      defaultGlucoseUnit: snapshot.data()['defaultGlucoseUnit'] ?? "ммоль/л",
+      defaultMealUnit: snapshot.data()['defaultMealUnit'] ?? "грами",
+      glucoseCoefficient: snapshot.data()['glucoseCoefficient'].toString() ?? "1",
     );
   }
 
