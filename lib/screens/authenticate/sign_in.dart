@@ -30,6 +30,7 @@ class _SignInState extends State<SignIn> {
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
+        brightness: Brightness.dark,
         elevation: 0,
         title: Text('Sign In'),
         actions: [
@@ -38,7 +39,7 @@ class _SignInState extends State<SignIn> {
                 widget.toggleView();
               },
               icon: Icon(Icons.person, color: Colors.white),
-              label: Text('Register', style: TextStyle(color: Colors.white))
+              label: Text('Реєстрація', style: TextStyle(color: Colors.white))
           ),
         ],
       ),
@@ -51,16 +52,16 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20,),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                validator: (val) => val.isEmpty ? 'Введіть email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
                 },
               ),
               SizedBox(height: 20,),
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                decoration: textInputDecoration.copyWith(hintText: 'Пароль'),
                 obscureText: true,
-                validator: (val) => val.length < 6 ? 'Password cannot be shorter 6 chars' : null,
+                validator: (val) => val.length < 6 ? 'Пароль має бути довше 6 символів' : null,
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -76,7 +77,7 @@ class _SignInState extends State<SignIn> {
 
                     if (res == null) {
                       setState(() {
-                        error = 'Could not sign in with those credentials';
+                        error = 'Неможливо увійти. Email та пароль не збігаються.';
                         loading = false;
                       });
                     }

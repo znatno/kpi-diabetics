@@ -39,7 +39,7 @@ class _ShowRecommendState extends State<ShowRecommend> {
           print("recommended $_recommendedDose");
           return Scaffold(
             appBar: AppBar(
-              title: Text('Diabetics App'),
+              title: Text('Рекомендація'),
               backgroundColor: Colors.blue[400],
               brightness: Brightness.dark,
               elevation: 0,

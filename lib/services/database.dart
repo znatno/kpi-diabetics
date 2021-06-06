@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_diabetics/models/brew.dart';
 import 'package:flutter_diabetics/models/app_user.dart';
 import 'package:flutter_diabetics/models/food_record.dart';
 import 'package:flutter_diabetics/models/glucose_record.dart';
@@ -14,14 +13,14 @@ class DatabaseService {
 
   //UserData({ this.uid, this.name, this.startShown, this.defaultGlucoseUnit, this.defaultMealUnit});
   // register & update settings
-  Future<void> updateUserData(String name) async {
+  Future<void> updateUserData(String name, String glucoseCoefficient) async {
 
     return await userCollection.doc(uid).set({
       'name': name,
       'startShown': false,
       'defaultGlucoseUnit': "ммоль/л", // todo: add implementation
       'defaultMealUnit': "грами",    // todo: add implementation
-      'glucoseCoefficient': 1,  // todo: individual coefficient chosen by doctor
+      'glucoseCoefficient': 1.0,
     });
   }
 
@@ -37,6 +36,7 @@ class DatabaseService {
 
   // TODO: додати запис прийому їжі
   Future updateFoodRecord(FoodRecord foodRecord) async {
+    print(foodRecord.toMap());
 
     return await userCollection.doc(uid).collection('foodRecords')
         .doc(foodRecord.id).set(foodRecord.toMap());
@@ -49,11 +49,33 @@ class DatabaseService {
         .doc(glucoseRecord.id).set(glucoseRecord.toMap());
   }
 
-  // brew list from snapshot
-  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+  // GlucoseRecords list from snapshot
+  List<GlucoseRecord> _glucoseListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      return Brew(
-        name: doc.data()['name'] ?? '',
+      return GlucoseRecord(
+        id: doc.id ?? 'err',
+        amount: doc.data()['amount'] ?? 'err',
+        normality: doc.data()['normality'] ?? 'err',
+        recommend: doc.data()['recommend'] ?? 'err',
+        timestamp: doc.data()['timestamp'].toDate() ?? 'err',
+        type: doc.data()['type'] ?? 'err',
+        units: doc.data()['units'] ?? 'err',
+      );
+    }).toList();
+  }
+
+  // FoodRecords list from snapshot
+  List<FoodRecord> _foodListFromSnapshot(QuerySnapshot snapshot) {
+
+
+    return snapshot.docs.map((doc) {
+      return FoodRecord(
+        id: doc.id ?? 'err',
+        foodList: doc.data()['foodList'].split(',') ?? 'err',
+        recommendedDose: doc.data()['recommendedDose'] ?? 'err',
+        timestamp: doc.data()['timestamp'].toDate() ?? 'err',
+        totalCarbs: doc.data()['totalCarbs'] ?? 'err',
+        type: doc.data()['type'] ?? 'err',
       );
     }).toList();
   }
@@ -69,10 +91,16 @@ class DatabaseService {
     );
   }
 
-  // get brews stream
-  Stream<List<Brew>> get brews {
-    return userCollection.snapshots()
-        .map(_brewListFromSnapshot);
+  // get GlucoseRecords stream
+  Stream<List<GlucoseRecord>> get glucoseRecords {
+    return userCollection.doc(uid).collection('glucoseRecords').snapshots()
+        .map(_glucoseListFromSnapshot);
+  }
+
+  // get FoodRecords stream
+  Stream<List<FoodRecord>> get foodRecords {
+    return userCollection.doc(uid).collection('foodRecords').snapshots()
+        .map(_foodListFromSnapshot);
   }
 
   // get user doc stream
@@ -80,17 +108,5 @@ class DatabaseService {
     return userCollection.doc(uid).snapshots()
     .map(_userDataFromSnapshot);
   }
-
-  /*
-
-   TODO: зробити отримання БД (колекції) користувач своїх
-         списків записів прийому їжі та замірів глюкози.
-         Я так розумію, що цей клас повинен отримувати внутрішню колекцію
-         з колекції користувачів.
-         Відповідно, це подібно матиме наступний вигляд:
-         - Stream<FoodRecord> get foodRecord  (для прийому їжі)
-         - Stream<GlucoseRecord> get glucoseRecord (для заміру цукру)
-
-   */
 
 }

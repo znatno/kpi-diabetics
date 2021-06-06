@@ -30,6 +30,7 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
+        brightness: Brightness.dark,
         elevation: 0,
         title: Text('Sign Up'),
         actions: [
@@ -38,7 +39,7 @@ class _RegisterState extends State<Register> {
                 widget.toggleView();
               },
               icon: Icon(Icons.person, color: Colors.white),
-              label: Text('Sign In', style: TextStyle(color: Colors.white))
+              label: Text('Увійти', style: TextStyle(color: Colors.white))
           ),
         ],
       ),
@@ -51,7 +52,7 @@ class _RegisterState extends State<Register> {
               SizedBox(height: 20,),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                validator: (val) => val.isEmpty ? 'Введіть email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
                 },
@@ -60,7 +61,7 @@ class _RegisterState extends State<Register> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 obscureText: true,
-                validator: (val) => val.length < 6 ? 'Use 8 characters or more for a password' : null,
+                validator: (val) => val.length < 8 ? 'Пароль має бути від 8 символів' : null,
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -72,7 +73,7 @@ class _RegisterState extends State<Register> {
                     setState(() => true);
                     dynamic res = await _auth.registerWithEmailPassword(email, password);
                     if (res == null) {
-                      setState(() => error = 'Please enter a valid email');
+                      setState(() => error = 'Введіть коректний email');
                       loading = false;
                     }
                   }

@@ -15,6 +15,7 @@ class _SettingsFormState extends State<SettingsForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _currentName;
+  String _currentGlucoseCoefficient;
 
   @override
   Widget build(BuildContext context) {
@@ -33,32 +34,49 @@ class _SettingsFormState extends State<SettingsForm> {
               child: Column(
                 children: [
                 Text(
-                'Update your settings',
-                style: TextStyle(fontSize: 18),
+                'Ваші налаштування',
+                style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: 20),
               // name input
               TextFormField(
                 initialValue: userData.name,
-                decoration: textInputDecoration,
+                decoration: textInputDecoration.copyWith(labelText: "Ім'я"),
                 validator: (val) => val.isEmpty ? 'Please enter a name' : null,
                 onChanged: (val) => setState(() => _currentName = val),
               ),
               SizedBox(height: 20),
+              // coefficient
+              TextFormField(
+                initialValue: userData.glucoseCoefficient,
+                decoration: textInputDecoration.copyWith(labelText: "Коефіцієнт"),
+                validator: (val) => val.isEmpty ? 'Please enter a coefficient' : null,
+                onChanged: (val) => setState(() => _currentGlucoseCoefficient = val),
+              ),
+              SizedBox(height: 8),
+              Text(
+                "Коефіцієнт враховується при обчисленні кількості "
+                "рекомендованих одиниць інсуліновмісного препарату."
+                "1 од. препарату призначається на 12 г спожитих "
+                "вуглеводів, якщо ви зміните коефіцієнт на 1.5, то "
+                "відповідно 1 од. призначатиметься на 16 г (12 * 1.5).\n\n"
+                "Будь ласка, проконсультуйтеся з вашим лікарем.",
+                style: TextStyle(fontSize: 10, color: Colors.black45),
+              ),
+              SizedBox(height: 16),
               RaisedButton(
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     await DatabaseService(uid: user.uid).updateUserData(
-                        _currentName ?? userData.name
-                        // _currentSugars ?? userData.sugars,
-                        // _currentStrength ?? userData.strength
+                        _currentName ?? userData.name,
+                        double.parse(_currentGlucoseCoefficient) ?? "1.0",
                     );
                     Navigator.pop(context);
                   }
                 },
                 color: colorMainAccent,
                 child: Text(
-                    'Update',
+                    'Зберегти',
                     style: TextStyle(color: Colors.white)),
               ),
             ],

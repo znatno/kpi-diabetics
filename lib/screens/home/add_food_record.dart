@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_diabetics/models/food_record.dart';
 import 'package:flutter_diabetics/screens/home/show_recommend.dart';
-import 'package:flutter_diabetics/services/database.dart';
 import 'package:flutter_diabetics/shared/constants.dart';
 import 'package:flutter_diabetics/models/app_user.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +23,7 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
   String    _units = "Грами";   // грами, мл тощо
   double    _amount;            // к-сть грам/мл
   double    _carbs;             // к-сть вуглеводів на 100 од.
+  List<dynamic> _foodList;
 
   @override
   Widget build(BuildContext context) {
@@ -108,20 +108,24 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
 
+                  _foodList = [_name, _units, _amount, _carbs];
+
                   FoodRecord _record = FoodRecord(
                     timestamp: DateTime.now(),
                     type: _type,
-                    foodList: [{_name, _units, _amount, _carbs}],
+                    foodList: _foodList,
                     totalCarbs: _carbs * _amount / 100,
                   );
 
-                  // await DatabaseService(uid: user.uid).updateFoodRecord(_record);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ShowRecommend(record: _record)),);
                 }
               },
               child: Text(
                   'Додати прийом їжі',
                   style: TextStyle(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                primary: colorMainAccent
+              ),
             ),
           ],
         ),
