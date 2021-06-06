@@ -71,7 +71,8 @@ class DatabaseService {
     return snapshot.docs.map((doc) {
       return FoodRecord(
         id: doc.id ?? 'err',
-        foodList: doc.data()['foodList'].split(',') ?? 'err',
+        foodList: doc.data()['foodList']
+            .replaceAll('[', '').replaceAll(']', '').split(',') ?? 'err',
         recommendedDose: doc.data()['recommendedDose'] ?? 'err',
         timestamp: doc.data()['timestamp'].toDate() ?? 'err',
         totalCarbs: doc.data()['totalCarbs'] ?? 'err',

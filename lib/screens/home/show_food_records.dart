@@ -16,7 +16,7 @@ class ShowFoodRecords extends StatelessWidget {
       value: DatabaseService(uid: user.uid).foodRecords,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Заміри цукру крові'),
+          title: Text('Список спожитої їжі'),
           brightness: Brightness.dark,
           elevation: 0,
         ),

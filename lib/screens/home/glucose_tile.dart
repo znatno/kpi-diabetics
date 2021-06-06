@@ -10,8 +10,6 @@ class GlucoseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    print(record.id);
-
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(

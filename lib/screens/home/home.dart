@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_diabetics/models/app_user.dart';
 import 'package:flutter_diabetics/screens/home/add_food_record.dart';
 import 'package:flutter_diabetics/screens/home/add_glucose_record.dart';
 import 'package:flutter_diabetics/screens/home/settings_form.dart';
 import 'package:flutter_diabetics/screens/home/show_food_records.dart';
 import 'package:flutter_diabetics/screens/home/show_glucose_records.dart';
 import 'package:flutter_diabetics/services/auth.dart';
-import 'package:flutter_diabetics/services/database.dart';
-import 'package:provider/provider.dart';
 
-class HomeBtns extends StatelessWidget {
+class Home extends StatelessWidget {
 
   final AuthService _auth = AuthService();
 

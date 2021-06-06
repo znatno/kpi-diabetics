@@ -15,12 +15,12 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
 
   final _formKey = GlobalKey<FormState>();
   final List<String> _recordType = ["Cніданок", "Обід", "Вечеря", "Перед сном", "Інше"];
-  final List<String> _intakeUnits = ["Грами", "Мілілітри", "Інше"];
+  final List<String> _intakeUnits = ["г", "мл", "Інше"];
 
   String    _type = "Сніданок"; // сніданок, обід, вечеря тощо
 
   String    _name;              // назва їжі
-  String    _units = "Грами";   // грами, мл тощо
+  String    _units = "г";   // грами, мл тощо
   double    _amount;            // к-сть грам/мл
   double    _carbs;             // к-сть вуглеводів на 100 од.
   List<dynamic> _foodList;
