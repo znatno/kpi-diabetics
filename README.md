@@ -1,6 +1,6 @@
 # flutter_diabetics
 
-Thesis work
+Thesis work. The app is made on Flutter framework with Dart language
 
 ## Abstract
 
