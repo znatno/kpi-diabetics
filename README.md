@@ -2,15 +2,10 @@
 
 Thesis work
 
-## Getting Started
+## Abstract
 
-This project is a starting point for a Flutter application.
+The work aimed to create a mobile supplement for patients with insulin-dependent diabetes mellitus. The interface of the created mobile application allows the user to create an account, log in, enter blood sugar values, consume food, view entered entries. Based on the data entered, the program invites board members to recommend the number of units of the drug, an analog of short-acting human insulin. The application may ask the user to change the coefficient of calculation of the recommended dose of the rear return of individual indicators.
 
-A few resources to get you started if this is your first Flutter project:
+## Run
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Supports only iOS and Android. Install Android Studio for compile and run the project for your or emulated device.
