@@ -32,7 +32,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.blue[400],
         brightness: Brightness.dark,
         elevation: 0,
-        title: Text('Sign Up'),
+        title: Text('Реєстрація'),
         actions: [
           FlatButton.icon(
               onPressed: () {
@@ -59,7 +59,7 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20,),
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                decoration: textInputDecoration.copyWith(hintText: 'Пароль'),
                 obscureText: true,
                 validator: (val) => val.length < 8 ? 'Пароль має бути від 8 символів' : null,
                 onChanged: (val) {
@@ -80,7 +80,7 @@ class _RegisterState extends State<Register> {
                 },
                 color: colorMainAccent,
                 child: Text(
-                  'Sign Up',
+                  'Зареєструватись',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -103,9 +103,7 @@ class Home extends StatelessWidget {
                   ),
               ]
               ),
-
               Divider(),
-
               /* Перегляд таблиць */
               // Перегляд прийомів їжі
               Row(
@@ -142,7 +140,8 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              Divider(),
             ],
           ),
         )

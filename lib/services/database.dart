@@ -24,22 +24,18 @@ class DatabaseService {
     });
   }
 
-  Future<String> getUserGC() async {
-    String coef;
-
-    await userCollection.doc(uid).get().then((snapshot) {
-      coef = snapshot.data()['glucoseCoefficient'].toString();
-    });
-
-    return coef;
-  }
-
-  // TODO: додати запис прийому їжі
+  // додати або оновити запис прийому їжі
   Future updateFoodRecord(FoodRecord foodRecord) async {
     print(foodRecord.toMap());
 
     return await userCollection.doc(uid).collection('foodRecords')
         .doc(foodRecord.id).set(foodRecord.toMap());
+  }
+  // видалити запис прийому їжі
+  Future delFoodRecord(String id) async {
+
+    return await userCollection.doc(uid).collection('foodRecords')
+        .doc(id).delete();
   }
 
   // додати або оновити запис заміру цукру
@@ -47,6 +43,12 @@ class DatabaseService {
 
     return await userCollection.doc(uid).collection('glucoseRecords')
         .doc(glucoseRecord.id).set(glucoseRecord.toMap());
+  }
+  // видалити запис заміру цукру
+  Future delGlucoseRecord(String id) async {
+
+    return await userCollection.doc(uid).collection('glucoseRecords')
+        .doc(id).delete();
   }
 
   // GlucoseRecords list from snapshot
@@ -66,8 +68,6 @@ class DatabaseService {
 
   // FoodRecords list from snapshot
   List<FoodRecord> _foodListFromSnapshot(QuerySnapshot snapshot) {
-
-
     return snapshot.docs.map((doc) {
       return FoodRecord(
         id: doc.id ?? 'err',

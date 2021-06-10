@@ -32,7 +32,7 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.blue[400],
         brightness: Brightness.dark,
         elevation: 0,
-        title: Text('Sign In'),
+        title: Text('Вхід'),
         actions: [
           FlatButton.icon(
               onPressed: () {
@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                 },
                 color: colorMainAccent,
                 child: Text(
-                  'Sign In',
+                  'Увійти',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

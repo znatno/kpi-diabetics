@@ -36,7 +36,6 @@ class _AddFoodRecordFormState extends State<AddFoodRecordForm> {
         child: Column(
           children: [
             SizedBox(height: 20),
-            // mealType (foodRecord.type)
             DropdownButtonFormField(
               decoration: textInputDecoration.copyWith(labelText: "Прийом їжі"),
               value: _recordType.first,

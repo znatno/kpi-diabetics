@@ -8,6 +8,7 @@ import 'package:flutter_diabetics/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class ShowRecommend extends StatefulWidget {
+
   final FoodRecord record;
   ShowRecommend({ this.record });
 
@@ -23,6 +24,13 @@ class _ShowRecommendState extends State<ShowRecommend> {
     double _recommendedDose;
     double _glucoseCoefficient;
 
+    print("AFTER!!");
+    print(widget.record.id);
+    print(widget.record.type);
+    print(widget.record.foodList);
+    print(widget.record.totalCarbs);
+    print(widget.record.recommendedDose);
+
     return StreamBuilder<UserData>(
       stream: DatabaseService(uid: user.uid).userData,
       builder: (context, snapshot) {
@@ -33,10 +41,9 @@ class _ShowRecommendState extends State<ShowRecommend> {
           // обчислення рекомендованої дози
           _glucoseCoefficient = num.tryParse(userData.glucoseCoefficient)?.toDouble() ?? 1.0;
           _recommendedDose = double.parse(
-              (widget.record.totalCarbs / (12 * _glucoseCoefficient)).toStringAsFixed(2)
+              (widget.record.totalCarbs / 12 * _glucoseCoefficient).toStringAsFixed(2)
           );
 
-          print("recommended $_recommendedDose");
           return Scaffold(
             appBar: AppBar(
               title: Text('Рекомендація'),
@@ -64,6 +71,7 @@ class _ShowRecommendState extends State<ShowRecommend> {
                     onPressed: () async {
 
                       FoodRecord _record = FoodRecord(
+                        id: widget.record.id,
                         timestamp: widget.record.timestamp,
                         type: widget.record.type,
                         foodList: widget.record.foodList,
